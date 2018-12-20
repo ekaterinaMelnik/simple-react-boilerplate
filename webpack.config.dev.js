@@ -55,7 +55,8 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'App title',
+      title: 'React App title',
+      favicon: path.join('./src/favicon.ico'),
       template: path.join('./src/index.ejs'),
       version: require('./package.json').version,
       inject: 'body',
