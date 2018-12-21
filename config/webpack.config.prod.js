@@ -1,17 +1,21 @@
 const path = require('path');
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
+const { src, dist } = require('./paths').paths;
+
+const WebpackAliases = require('./paths').aliases;
+
 const config = {
-  entry: ['./src/index.jsx'],
+  entry: src,
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: dist,
     filename: 'bundle.[hash:6].js'
-  },
-  resolve: {
-    extensions: ['jsx', '.js', '.scss', '.css']
   },
   module: {
     rules: [
@@ -19,6 +23,10 @@ const config = {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
       },
       {
         test: /\.scss$/,
@@ -52,35 +60,55 @@ const config = {
         ]
       },
       {
-        test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
-        loader: 'url-loader?limit=10000&name=[name]-[hash].[ext]',
-        include: path.join(__dirname, 'src')
+        test: /\.(png|svg|jpg)$/,
+        use: {
+          loader: 'file-loader?name=images/[name].[hash:6].[ext]'
+        }
       },
       {
-        test: /\.ico$/,
+        test: /\.(eot|eot|ttf|woff|otf)$/,
+        use: {
+          loader: 'file-loader?name=fonts/[name].[hash:6].[ext]'
+        }
+      },
+      {
+        test: /\.(ico)$/,
         loader: 'file-loader?name=[name].[ext]'
       },
       {
         test: /\.json$/,
         loader: 'json-loader',
-        include: path.join(__dirname, 'src')
+        include: path.join(src)
       }
     ]
   },
+  resolve: {
+    alias: WebpackAliases,
+    extensions: ['.js', '.jsx', '.json']
+  },
   plugins: [
     new MinifyPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash:6].css'
+    }),
     new HtmlWebpackPlugin({
       title: 'React App title',
-      favicon: path.join('./src/favicon.ico'),
-      template: path.join('./src/index.ejs'),
-      version: require('./package.json').version,
+      favicon: path.join(src, '/favicon.ico'),
+      template: path.join(src, '/index.ejs'),
+      version: require('../package.json').version,
       inject: 'body',
       minify: {
         removeComments: true,
         collapseWhitespace: true
       },
       hash: true
+    }),
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
+    new webpack.DefinePlugin({
+      DEV: JSON.stringify(false),
+      PROD: JSON.stringify(true)
     })
   ]
 };

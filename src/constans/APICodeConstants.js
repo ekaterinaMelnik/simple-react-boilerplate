@@ -1,0 +1,9 @@
+export default {
+  SUCCESS: 200,
+  BAD_REQUEST: 400,
+  WRONG_TOKEN: 401,
+  SERVICE_UNAVAILABLE: 503,
+  GATEWAY_TIMEOUT: 504
+};
+
+export const errorCodes = [522, 597, 598, 400, 587, 529, 588, 585, 535, 536, 537];
