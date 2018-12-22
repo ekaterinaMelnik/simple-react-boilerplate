@@ -21,6 +21,11 @@
     "react": {
       "pragma": "React",
       "version": "16.6.3s"
+    },
+    "import/resolver": {
+      "babel-module": {
+        "extensions": [".js", ".jsx"]
+      }
     }
   },
   "rules": {

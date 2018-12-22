@@ -16,7 +16,9 @@ const ALIASES = {
   fonts: path.resolve(__dirname, '../src/fonts/'),
 
   // features
-  App: path.resolve(__dirname, '../src/components/App')
+  App: path.resolve(__dirname, '../src/components/App'),
+  UserInfo: path.resolve(__dirname, '../src/components/UserInfo'),
+  UserLocation: path.resolve(__dirname, '../src/components/UserLocation')
 };
 
 module.exports = {
