@@ -1,14 +1,17 @@
 import * as React from 'react';
+import { Switch } from 'react-router-dom';
+import { MainWrapper } from '../Layouts/MainWrapper/MainWrapper';
+import { routesMapper } from '../../core/Utils';
+import routes from '../../routes.js';
 import * as styles from './App.scss';
-import img from 'images/avatar.png';
 import '../../styles/_main.scss';
-// import img from '../../images/avatar.png';
 
 const App = () => (
   <div className={styles.text}>
-    <span>This is react app!!</span>
-    <img src={img} />
+    <MainWrapper>
+      <Switch>{routesMapper(routes)}</Switch>
+    </MainWrapper>
   </div>
 );
 
-export default App;
+export { App };

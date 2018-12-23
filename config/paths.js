@@ -13,12 +13,7 @@ const ALIASES = {
   components: path.resolve(__dirname, '../src/components/'),
   images: path.resolve(__dirname, '../src/images/'),
   constants: path.resolve(__dirname, '../src/constants/'),
-  fonts: path.resolve(__dirname, '../src/fonts/'),
-
-  // features
-  App: path.resolve(__dirname, '../src/components/App'),
-  UserInfo: path.resolve(__dirname, '../src/components/UserInfo'),
-  UserLocation: path.resolve(__dirname, '../src/components/UserLocation')
+  fonts: path.resolve(__dirname, '../src/fonts/')
 };
 
 module.exports = {

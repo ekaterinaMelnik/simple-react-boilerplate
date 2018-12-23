@@ -50,7 +50,7 @@ const config = {
         }
       },
       {
-        test: /\.(eot|eot|ttf|woff|otf)$/,
+        test: /\.(eot|ttf|woff|otf)$/,
         use: {
           loader: 'file-loader?name=fonts/[name].[hash:6].[ext]'
         }
@@ -91,7 +91,10 @@ const config = {
     compress: false,
     hot: true,
     inline: true,
-    clientLogLevel: 'none'
+    clientLogLevel: 'none',
+    historyApiFallback: {
+      disableDotRule: true
+    }
   }
 };
 
