@@ -1,5 +1,4 @@
 # React Boilerplate
->>>>>>> b5d319546e99d8ebf99cdf2fc5dc8b4c9ee3f23e
 
 Features:
 
