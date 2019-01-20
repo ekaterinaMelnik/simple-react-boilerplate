@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -49,7 +48,7 @@ const config = {
             options: {
               plugins: () => [
                 autoprefixer({
-                  browsers: ['last 2 version']
+                  'browsers': ['> 1%', 'last 2 versions']
                 })
               ]
             }
@@ -66,7 +65,7 @@ const config = {
         }
       },
       {
-        test: /\.(eot|eot|ttf|woff|otf)$/,
+        test: /\.(eot|ttf|woff|otf)$/,
         use: {
           loader: 'file-loader?name=fonts/[name].[hash:6].[ext]'
         }
@@ -84,7 +83,7 @@ const config = {
   },
   resolve: {
     alias: WebpackAliases,
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx']
   },
   plugins: [
     new MinifyPlugin(),
@@ -92,7 +91,7 @@ const config = {
       filename: '[name].[hash:6].css'
     }),
     new HtmlWebpackPlugin({
-      title: 'React App title',
+      title: 'React Boilerplate',
       favicon: path.join(src, '/favicon.ico'),
       template: path.join(src, '/index.ejs'),
       version: require('../package.json').version,
@@ -105,10 +104,6 @@ const config = {
     }),
     new UglifyJsPlugin({
       sourceMap: true
-    }),
-    new webpack.DefinePlugin({
-      DEV: JSON.stringify(false),
-      PROD: JSON.stringify(true)
     })
   ]
 };

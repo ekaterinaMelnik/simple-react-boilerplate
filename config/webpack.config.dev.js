@@ -58,22 +58,17 @@ const config = {
       {
         test: /\.(ico)$/,
         loader: 'file-loader?name=[name].[ext]'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-        include: path.join(src)
       }
     ]
   },
   resolve: {
     alias: WebpackAliases,
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'React App title',
+      title: 'React Boilerplate',
       favicon: path.join(src, '/favicon.ico'),
       template: path.join(src, '/index.ejs'),
       version: require('../package.json').version,
@@ -86,7 +81,7 @@ const config = {
     })
   ],
   devServer: {
-    contentBase: dist,
+    contentBase: src,
     port: 8000,
     compress: false,
     hot: true,
